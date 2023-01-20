@@ -7,7 +7,7 @@ const Login: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>AppName | Login</title>
+        <title>List It | Login</title>
       </Head>
       <LoginForm />
     </>
