@@ -1,7 +1,9 @@
 import axios from 'axios';
+import Image from 'next/image';
 import Router from 'next/router';
 import { useState } from 'react';
 import baseUrl from '../../../lib/baseUrl';
+import logo from '../../../public/images/list-it-logo-primary.png';
 import InputBox from '../input-box/InputBox';
 
 export interface ILoginForm {}
@@ -23,8 +25,8 @@ const LoginForm: React.FC<ILoginForm> = () => {
   };
 
   return (
-    <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-sm mt-2 md:mt-40">
-      <h1 className="font-bold text-center text-2xl mb-5">Login Template</h1>
+    <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-sm mt-2 md:mt-40 flex flex-col items-center space-y-6">
+      <Image src={logo} alt="List It Logo" height={150} />
       <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
         <div className="px-5 py-7">
           <form onSubmit={handleSubmit}>
@@ -34,6 +36,7 @@ const LoginForm: React.FC<ILoginForm> = () => {
             <InputBox
               value={username}
               onChange={(e) => setUsername(e.currentTarget.value)}
+              placeholder="user@email.com"
             />
             <label className="font-semibold text-sm text-gray-600 pb-1 block">
               Password
@@ -42,6 +45,7 @@ const LoginForm: React.FC<ILoginForm> = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.currentTarget.value)}
+              placeholder="********"
             />
             <button
               type="submit"
