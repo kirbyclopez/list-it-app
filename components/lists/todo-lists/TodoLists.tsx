@@ -3,10 +3,33 @@ import TodoListItem, { ITodoListItem } from '../todo-list-item/TodoListItem';
 
 export interface ITodoLists extends ComponentPropsWithoutRef<'div'> {
   lists: ITodoListItem[];
+  isLoading: boolean;
+  isError: boolean;
+  error: string;
 }
 
-const TodoLists: React.FC<ITodoLists> = ({ lists, ...divProps }) => {
+const TodoLists: React.FC<ITodoLists> = ({
+  lists,
+  isLoading,
+  isError,
+  error,
+  ...divProps
+}) => {
   const [editListId, setEditListId] = useState<string>('');
+
+  if (isLoading)
+    return (
+      <div {...divProps} className="my-5">
+        <p className="text-center text-slate-400">Getting lists...</p>
+      </div>
+    );
+
+  if (isError)
+    return (
+      <div {...divProps} className="my-5">
+        <p className="text-center text-slate-400">Error: {error}</p>
+      </div>
+    );
 
   return (
     <div {...divProps} className="my-5">

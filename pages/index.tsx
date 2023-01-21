@@ -36,12 +36,15 @@ const Home: NextPageWithLayout = () => {
         <title>List It | Dashboard</title>
       </Head>
       <div className="flex flex-col flex-1 items-center">
-        {isLoading && <p>Getting lists...</p>}
-        {isError && <p>Error is -- {error?.message}</p>}
         <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
           <h1 className="text-center text-3xl font-medium">Task Lists</h1>
           <AddListForm />
-          <TodoLists lists={data || []} />
+          <TodoLists
+            lists={data || []}
+            isLoading={isLoading}
+            isError={isError}
+            error={error?.message || ''}
+          />
         </div>
       </div>
     </>
