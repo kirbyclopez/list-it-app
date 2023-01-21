@@ -1,12 +1,14 @@
-export interface ITodoListItem {
+import { ComponentPropsWithoutRef } from 'react';
+
+export interface ITodoListItem extends ComponentPropsWithoutRef<'div'> {
   id: string;
   name: string;
 }
 
-const TodoListItem: React.FC<ITodoListItem> = ({ id, name }) => {
+const TodoListItem: React.FC<ITodoListItem> = ({ id, name, ...divProps }) => {
   return (
     <div
-      id="task"
+      {...divProps}
       className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent"
     >
       <div className="inline-flex items-center space-x-3">
