@@ -9,7 +9,7 @@ export interface ITodoListCrud extends ComponentPropsWithoutRef<'div'> {
 
 const TodoListCrud: React.FC<ITodoListCrud> = ({ lists, ...divProps }) => {
   return (
-    <div className="max-w-xl mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
+    <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
       <h1 className="text-center text-3xl font-medium">Task Lists</h1>
       <AddListForm />
       <TodoLists lists={lists} />

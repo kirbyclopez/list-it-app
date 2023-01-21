@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Footer from '../components/layouts/footer/Footer';
 import Header from '../components/layouts/header/Header';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
+import TodoListCrud from '../components/lists/todo-list-crud/TodoListCrud';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
@@ -11,7 +12,7 @@ const Home: NextPageWithLayout = () => {
         <title>List It | Dashboard</title>
       </Head>
       <div className="flex flex-col flex-1 items-center">
-        <div className="text-xl">Welcome to List It!</div>
+        <TodoListCrud lists={[]} />
       </div>
     </>
   );
