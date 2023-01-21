@@ -13,7 +13,7 @@ const AddListForm: React.FC<IAddListForm> = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-10 xs:p-0 mx-auto md:w-full md:max-w-sm mt-2 md:mt-40 flex flex-row items-center space-x-1"
+      className="p-10 xs:p-0 flex flex-row items-center space-x-1"
     >
       <InputBox
         value={name}
