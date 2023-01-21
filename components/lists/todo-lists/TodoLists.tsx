@@ -12,7 +12,13 @@ const TodoLists: React.FC<ITodoLists> = ({ lists, ...divProps }) => {
     <div {...divProps} className="my-5">
       {lists.length > 0 &&
         lists.map((list, idx) => (
-          <TodoListItem key={idx} {...list} isEdit={editListId === list._id} />
+          <TodoListItem
+            key={idx}
+            {...list}
+            isEdit={editListId === list._id}
+            onEdit={() => setEditListId(list._id)}
+            onCancel={() => setEditListId('')}
+          />
         ))}
       {lists.length === 0 && (
         <p className="text-center text-slate-400">

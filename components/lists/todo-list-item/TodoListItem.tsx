@@ -1,19 +1,31 @@
-import { ComponentPropsWithoutRef, useState } from 'react';
+import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
 import InputBox from '../../forms/input-box/InputBox';
 
 export interface ITodoListItem extends ComponentPropsWithoutRef<'div'> {
   _id: string;
   name: string;
   isEdit: boolean;
+  onEdit?: () => void;
+  onDelete?: () => void;
+  onSave?: () => void;
+  onCancel?: () => void;
 }
 
 const TodoListItem: React.FC<ITodoListItem> = ({
   _id,
   name,
   isEdit,
+  onEdit,
+  onDelete,
+  onSave,
+  onCancel,
   ...divProps
 }) => {
   const [text, setText] = useState<string>(name);
+
+  useEffect(() => {
+    setText(name);
+  }, [isEdit]);
 
   return (
     <div
@@ -37,7 +49,7 @@ const TodoListItem: React.FC<ITodoListItem> = ({
       <div className="inline-flex space-x-4">
         {!isEdit && (
           <>
-            <button title="Edit">
+            <button title="Edit" onClick={onEdit}>
               <i className="fa-solid fa-pencil text-slate-500 hover:text-green-600"></i>
             </button>
             <button title="Delete">
@@ -50,7 +62,7 @@ const TodoListItem: React.FC<ITodoListItem> = ({
             <button title="Save">
               <i className="fa-solid fa-check text-slate-500 hover:text-green-600"></i>
             </button>
-            <button title="Cancel">
+            <button title="Cancel" onClick={onCancel}>
               <i className="fa-solid fa-xmark text-slate-500 hover:text-red-500"></i>
             </button>
           </>

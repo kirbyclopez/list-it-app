@@ -3,12 +3,14 @@ import { ITodoListCrud } from './TodoListCrud';
 const base: ITodoListCrud = {
   lists: [
     {
-      id: '1',
+      _id: '1',
       name: 'Sample List 1',
+      isEdit: false,
     },
     {
-      id: '2',
+      _id: '2',
       name: 'Sample List 2',
+      isEdit: false,
     },
   ],
 };
