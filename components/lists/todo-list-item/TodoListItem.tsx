@@ -30,19 +30,19 @@ const TodoListItem: React.FC<ITodoListItem> = ({
   return (
     <div
       {...divProps}
-      className="flex items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent space-x-6"
+      className={`flex items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent space-x-6 hover:cursor-pointer hover:bg-slate-50 ${
+        isEdit ? 'border-l-green-600' : ''
+      }`}
     >
       <div className="inline-flex flex-1">
         {!isEdit && (
-          <label className="text-gray-700 border-b border-b-transparent">
-            {name}
-          </label>
+          <label className="text-gray-700 border-b-transparent">{name}</label>
         )}
         {isEdit && (
           <InputBox
             value={text}
             onChange={(e) => setText(e.currentTarget.value)}
-            className="px-0 py-0 border-0 border-b text-base rounded-none border-b-slate-300 focus:ring-blue-500"
+            className="px-0 py-0 border-0 text-base rounded-none bg-transparent focus:ring-blue-500"
           />
         )}
       </div>
