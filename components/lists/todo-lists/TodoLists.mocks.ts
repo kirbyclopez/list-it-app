@@ -13,6 +13,9 @@ const base: ITodoLists = {
       isEdit: false,
     },
   ],
+  isLoading: false,
+  isError: false,
+  error: '',
 };
 
 export const mockTodoListsProps = {
