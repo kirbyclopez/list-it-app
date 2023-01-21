@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Footer from '../components/layouts/footer/Footer';
 import Header from '../components/layouts/header/Header';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
 import { NextPageWithLayout } from './page';
@@ -9,7 +10,7 @@ const Home: NextPageWithLayout = () => {
       <Head>
         <title>List It | Dashboard</title>
       </Head>
-      <div className="min-h-[300px] flex flex-col items-center justify-center">
+      <div className="flex flex-col flex-1 items-center">
         <div className="text-xl">Welcome to List It!</div>
       </div>
     </>
@@ -23,6 +24,7 @@ Home.getLayout = (page) => {
     <PrimaryLayout>
       <Header />
       {page}
+      <Footer />
     </PrimaryLayout>
   );
 };

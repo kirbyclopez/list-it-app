@@ -26,7 +26,7 @@ const LoginForm: React.FC<ILoginForm> = () => {
 
   return (
     <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-sm mt-2 md:mt-40 flex flex-col items-center space-y-6">
-      <Image src={logo} alt="List It Logo" height={150} />
+      <Image src={logo} alt="List It Logo" height={150} width={150} />
       <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
         <div className="px-5 py-7">
           <form onSubmit={handleSubmit}>
@@ -37,6 +37,7 @@ const LoginForm: React.FC<ILoginForm> = () => {
               value={username}
               onChange={(e) => setUsername(e.currentTarget.value)}
               placeholder="user@email.com"
+              className="mt-1 mb-5"
             />
             <label className="font-semibold text-sm text-gray-600 pb-1 block">
               Password
@@ -46,12 +47,13 @@ const LoginForm: React.FC<ILoginForm> = () => {
               value={password}
               onChange={(e) => setPassword(e.currentTarget.value)}
               placeholder="********"
+              className="mt-1 mb-5"
             />
             <button
               type="submit"
               className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
             >
-              <span className="inline-block mr-2">Login</span>
+              <span className="inline-block mr-2">Sign in</span>
             </button>
           </form>
         </div>
