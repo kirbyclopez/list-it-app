@@ -2,11 +2,12 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { QueryClient, UseQueryResult, useQuery } from 'react-query';
 import { DehydratedState, dehydrate } from 'react-query/hydration';
+import AddListForm from '../components/forms/add-list-form/AddListForm';
 import Footer from '../components/layouts/footer/Footer';
 import Header from '../components/layouts/header/Header';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
-import TodoListCrud from '../components/lists/todo-list-crud/TodoListCrud';
 import { ITodoListItem } from '../components/lists/todo-list-item/TodoListItem';
+import TodoLists from '../components/lists/todo-lists/TodoLists';
 import { instance } from '../lib/axios';
 import { NextPageWithLayout } from './page';
 
@@ -37,7 +38,11 @@ const Home: NextPageWithLayout = () => {
       <div className="flex flex-col flex-1 items-center">
         {isLoading && <p>Getting lists...</p>}
         {isError && <p>Error is -- {error?.message}</p>}
-        <TodoListCrud lists={data || []} />
+        <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
+          <h1 className="text-center text-3xl font-medium">Task Lists</h1>
+          <AddListForm />
+          <TodoLists lists={data || []} />
+        </div>
       </div>
     </>
   );
