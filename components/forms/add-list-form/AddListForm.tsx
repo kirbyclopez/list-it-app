@@ -22,7 +22,7 @@ const AddListForm: React.FC<IAddListForm> = () => {
       />
       <button
         type="submit"
-        className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white px-6 py-[9px] rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
+        className="transition duration-200 bg-green-700 hover:bg-green-800 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-green-700 focus:ring-opacity-50 text-white px-6 py-[9px] rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
       >
         <span className="inline-block">
           <i className="fa-solid fa-plus"></i>
