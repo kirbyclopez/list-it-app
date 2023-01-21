@@ -1,8 +1,7 @@
-import axios from 'axios';
 import Image from 'next/image';
 import Router from 'next/router';
 import { useState } from 'react';
-import baseUrl from '../../../lib/baseUrl';
+import { instance } from '../../../lib/axios';
 import logo from '../../../public/images/list-it-logo-primary.png';
 import InputBox from '../input-box/InputBox';
 
@@ -17,7 +16,7 @@ const LoginForm: React.FC<ILoginForm> = () => {
 
     const credentials = { username, password };
 
-    await axios.post(`${baseUrl}/api/auth/login`, credentials, {
+    await instance.post('/api/auth/login', credentials, {
       withCredentials: true,
     });
 

@@ -14,7 +14,8 @@ const TodoLists: React.FC<ITodoLists> = ({ lists, ...divProps }) => {
         lists.map((list, idx) => (
           <TodoListItem
             key={idx}
-            {...list}
+            _id={list._id}
+            name={list.name}
             isEdit={editListId === list._id}
             onEdit={() => setEditListId(list._id)}
             onCancel={() => setEditListId('')}

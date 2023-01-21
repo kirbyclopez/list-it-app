@@ -1,14 +1,14 @@
-import axios from 'axios';
 import Image from 'next/image';
+import Link from 'next/link';
 import Router from 'next/router';
-import baseUrl from '../../../lib/baseUrl';
+import { instance } from '../../../lib/axios';
 import logo from '../../../public/images/list-it-logo-primary-sm.png';
 
 export interface IHeader extends React.ComponentPropsWithoutRef<'header'> {}
 
 const Header: React.FC<IHeader> = ({ ...headerProps }) => {
   const handleLogout = async () => {
-    await axios.delete(`${baseUrl}/api/auth/sessions`, {
+    await instance.delete('/api/auth/sessions', {
       withCredentials: true,
     });
 
@@ -22,7 +22,7 @@ const Header: React.FC<IHeader> = ({ ...headerProps }) => {
     >
       <div className="flex items-center justify-between m-auto max-w-6xl">
         <h1 className="w-3/12 text-2xl py-2">
-          <a href="/" className="flex flex-row items-center space-x-3">
+          <Link href="/" className="flex flex-row items-center space-x-3">
             <Image
               src={logo}
               alt="List It Logo"
@@ -31,7 +31,7 @@ const Header: React.FC<IHeader> = ({ ...headerProps }) => {
               className="inline"
             />
             <span className="font-marko-one">List It</span>
-          </a>
+          </Link>
         </h1>
         <div className="w-3/12 flex justify-end">
           <button

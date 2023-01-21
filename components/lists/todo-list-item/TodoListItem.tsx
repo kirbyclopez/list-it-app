@@ -6,8 +6,8 @@ export interface ITodoListItem extends ComponentPropsWithoutRef<'div'> {
   name: string;
   isEdit: boolean;
   onEdit?: () => void;
-  onDelete?: () => void;
-  onSave?: () => void;
+  _onDelete?: () => void;
+  _onSave?: () => void;
   onCancel?: () => void;
 }
 
@@ -16,8 +16,8 @@ const TodoListItem: React.FC<ITodoListItem> = ({
   name,
   isEdit,
   onEdit,
-  onDelete,
-  onSave,
+  _onDelete,
+  _onSave,
   onCancel,
   ...divProps
 }) => {
@@ -25,7 +25,7 @@ const TodoListItem: React.FC<ITodoListItem> = ({
 
   useEffect(() => {
     setText(name);
-  }, [isEdit]);
+  }, [name, isEdit]);
 
   return (
     <div
