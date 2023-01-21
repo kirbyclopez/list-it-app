@@ -1,8 +1,9 @@
 import { ITodoListItem } from './TodoListItem';
 
 const base: ITodoListItem = {
-  id: '1',
+  _id: '1',
   name: 'Sample List',
+  isEdit: false,
 };
 
 export const mockTodoListItemProps = {

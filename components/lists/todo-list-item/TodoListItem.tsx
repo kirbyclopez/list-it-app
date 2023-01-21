@@ -1,26 +1,60 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, useState } from 'react';
+import InputBox from '../../forms/input-box/InputBox';
 
 export interface ITodoListItem extends ComponentPropsWithoutRef<'div'> {
-  id: string;
+  _id: string;
   name: string;
+  isEdit: boolean;
 }
 
-const TodoListItem: React.FC<ITodoListItem> = ({ id, name, ...divProps }) => {
+const TodoListItem: React.FC<ITodoListItem> = ({
+  _id,
+  name,
+  isEdit,
+  ...divProps
+}) => {
+  const [text, setText] = useState<string>(name);
+
   return (
     <div
       {...divProps}
-      className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent"
+      className="flex items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent space-x-6"
     >
-      <div className="inline-flex items-center space-x-3">
-        <div className="text-gray-700">{name}</div>
+      <div className="inline-flex flex-1">
+        {!isEdit && (
+          <label className="text-gray-700 border-b border-b-transparent">
+            {name}
+          </label>
+        )}
+        {isEdit && (
+          <InputBox
+            value={text}
+            onChange={(e) => setText(e.currentTarget.value)}
+            className="px-0 py-0 border-0 border-b text-base rounded-none border-b-slate-300 focus:ring-blue-500"
+          />
+        )}
       </div>
       <div className="inline-flex space-x-4">
-        <button title="Edit">
-          <i className="fa-solid fa-pencil text-slate-500 hover:text-green-600"></i>
-        </button>
-        <button title="Delete">
-          <i className="fa-solid fa-trash-can text-slate-500 hover:text-red-500"></i>
-        </button>
+        {!isEdit && (
+          <>
+            <button title="Edit">
+              <i className="fa-solid fa-pencil text-slate-500 hover:text-green-600"></i>
+            </button>
+            <button title="Delete">
+              <i className="fa-solid fa-trash-can text-slate-500 hover:text-red-500"></i>
+            </button>
+          </>
+        )}
+        {isEdit && (
+          <>
+            <button title="Save">
+              <i className="fa-solid fa-check text-slate-500 hover:text-green-600"></i>
+            </button>
+            <button title="Cancel">
+              <i className="fa-solid fa-xmark text-slate-500 hover:text-red-500"></i>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
