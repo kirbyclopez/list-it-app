@@ -1,13 +1,84 @@
+import { AxiosResponse } from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { instance } from '../../../lib/axios';
+import { ITodoListItem } from '../../lists/todo-list-item/TodoListItem';
 import InputBox from '../input-box/InputBox';
 
 export interface IAddListForm {}
+export interface ICreateListParams {
+  name: string;
+}
+interface IContext {
+  previousLists: ITodoListItem[] | undefined;
+}
+
+export const createList = async (name: string): Promise<ITodoListItem> => {
+  const data = { name };
+  const res: AxiosResponse = await instance.post('/api/lists', data, {
+    withCredentials: true,
+  });
+
+  return res.data;
+};
 
 const AddListForm: React.FC<IAddListForm> = () => {
   const [name, setName] = useState<string>('');
 
+  const queryClient = useQueryClient();
+
+  const mutation: UseMutationResult<ITodoListItem, Error, ICreateListParams> =
+    useMutation<ITodoListItem, Error, ICreateListParams, IContext | undefined>(
+      'addList',
+      async ({ name }) => createList(name),
+      {
+        onMutate: async (variables: ICreateListParams) => {
+          await queryClient.cancelQueries('lists');
+
+          const previousLists: ITodoListItem[] | undefined =
+            queryClient.getQueryData('lists');
+
+          queryClient.setQueryData(
+            'lists',
+            (old: ITodoListItem[] | undefined) =>
+              old ? [...old, { name: variables.name } as ITodoListItem] : []
+          );
+
+          return { previousLists };
+        },
+        onSuccess: (
+          _data: ITodoListItem,
+          _variables: ICreateListParams,
+          _context: IContext | undefined
+        ) => {
+          toast.success('Successfully added new list.');
+          queryClient.invalidateQueries('lists');
+        },
+        onError: (
+          _error: Error,
+          _variables: ICreateListParams,
+          context: IContext | undefined
+        ) => {
+          queryClient.setQueryData('lists', context?.previousLists);
+        },
+        onSettled: (
+          _data: ITodoListItem | undefined,
+          _error: Error | null,
+          _variables: ICreateListParams | undefined,
+          _context: IContext | undefined
+        ) => {
+          queryClient.invalidateQueries('lists');
+        },
+      }
+    );
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    mutation.mutate({ name });
+
+    setName('');
   };
 
   return (

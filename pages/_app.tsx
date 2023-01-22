@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate } from 'react-query/hydration';
 import './globals.css';
 import { NextPageWithLayout } from './page';
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider>
