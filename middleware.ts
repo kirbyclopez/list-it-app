@@ -9,6 +9,7 @@ const secret = new TextEncoder().encode(
 export default async function middleware(req: NextRequest) {
   const { cookies } = req;
   const token = cookies.get('accessToken')?.value;
+  const refreshToken = cookies.get('refreshToken')?.value;
 
   const { pathname } = req.nextUrl;
   const url = req.nextUrl.clone();
@@ -24,7 +25,7 @@ export default async function middleware(req: NextRequest) {
   if (url.pathname === '/login') {
     if (token) {
       try {
-        jwtVerify(token, secret);
+        await jwtVerify(token, secret);
 
         url.pathname = '/';
         return NextResponse.redirect(url);
@@ -39,10 +40,21 @@ export default async function middleware(req: NextRequest) {
     }
 
     try {
-      jwtVerify(token, secret);
+      await jwtVerify(token, secret);
 
       return NextResponse.next();
     } catch (e) {
+      if (refreshToken !== undefined) {
+        try {
+          await jwtVerify(refreshToken, secret);
+
+          return NextResponse.next();
+        } catch (e) {
+          url.pathname = '/login';
+          return NextResponse.redirect(url);
+        }
+      }
+
       url.pathname = '/login';
       return NextResponse.redirect(url);
     }
