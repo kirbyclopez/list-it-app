@@ -1,4 +1,10 @@
 import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
+import { UseMutationResult, useQueryClient } from 'react-query';
+import {
+  IDeleteListParams,
+  IMessageResponse,
+} from '../../../lib/interfaces/list.interface';
+import { useDeleteList } from '../../../lib/mutations/list.mutation';
 import InputBox from '../../forms/input-box/InputBox';
 
 export interface ITodoListItem extends ComponentPropsWithoutRef<'div'> {
@@ -22,10 +28,17 @@ const TodoListItem: React.FC<ITodoListItem> = ({
   ...divProps
 }) => {
   const [text, setText] = useState<string>(name);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setText(name);
   }, [name, isEdit]);
+
+  const mutation: UseMutationResult<
+    IMessageResponse,
+    Error,
+    IDeleteListParams
+  > = useDeleteList(queryClient);
 
   return (
     <div
@@ -54,7 +67,7 @@ const TodoListItem: React.FC<ITodoListItem> = ({
             <button title="Edit" onClick={onEdit}>
               <i className="fa-solid fa-pencil text-slate-500 hover:text-green-600"></i>
             </button>
-            <button title="Delete">
+            <button title="Delete" onClick={() => mutation.mutate({ _id })}>
               <i className="fa-solid fa-trash-can text-slate-500 hover:text-red-500"></i>
             </button>
           </>
