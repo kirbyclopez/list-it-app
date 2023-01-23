@@ -36,10 +36,14 @@ const TodoListItem: React.FC<ITodoListItem> = ({
       }`}
     >
       {!isEdit && (
-        <Link href={`/lists/${_id}`} className="inline-flex flex-1">
-          <label className="text-gray-700 border-b-transparent hover:cursor-pointer">
+        <Link
+          href={`/lists/${_id}`}
+          className="inline-flex items-center flex-1 group"
+        >
+          <label className="flex-1 text-gray-700 border-b-transparent hover:cursor-pointer">
             {name}
           </label>
+          <i className="fa-solid fa-chevron-right text-slate-500 invisible group-hover:visible"></i>
         </Link>
       )}
       {isEdit && (
