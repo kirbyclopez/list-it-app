@@ -8,7 +8,7 @@ export interface ITodoListItem extends ComponentPropsWithoutRef<'div'> {
   isEdit: boolean;
   onEdit: () => void;
   onDelete: () => void;
-  onSave: (name: string) => void;
+  onSave: (_name: string) => void;
   onCancel: () => void;
 }
 
@@ -35,20 +35,22 @@ const TodoListItem: React.FC<ITodoListItem> = ({
         isEdit ? 'border-l-green-600' : ''
       }`}
     >
-      <Link href={`/lists/${_id}`} className="inline-flex flex-1">
-        {!isEdit && (
+      {!isEdit && (
+        <Link href={`/lists/${_id}`} className="inline-flex flex-1">
           <label className="text-gray-700 border-b-transparent hover:cursor-pointer">
             {name}
           </label>
-        )}
-        {isEdit && (
+        </Link>
+      )}
+      {isEdit && (
+        <div className="inline-flex flex-1">
           <InputBox
             value={text}
             onChange={(e) => setText(e.currentTarget.value)}
             className="px-0 py-0 border-0 text-base rounded-none bg-transparent focus:ring-blue-500"
           />
-        )}
-      </Link>
+        </div>
+      )}
       <div className="inline-flex space-x-4">
         {!isEdit && (
           <>
