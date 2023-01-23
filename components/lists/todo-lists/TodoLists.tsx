@@ -1,4 +1,14 @@
 import { ComponentPropsWithoutRef, useState } from 'react';
+import { UseMutationResult, useQueryClient } from 'react-query';
+import {
+  IDeleteListParams,
+  IEditListParams,
+  IMessageResponse,
+} from '../../../lib/interfaces/list.interface';
+import {
+  useDeleteList,
+  useEditList,
+} from '../../../lib/mutations/list.mutation';
 import TodoListItem, { ITodoListItem } from '../todo-list-item/TodoListItem';
 
 export interface ITodoLists extends ComponentPropsWithoutRef<'div'> {
@@ -16,6 +26,21 @@ const TodoLists: React.FC<ITodoLists> = ({
   ...divProps
 }) => {
   const [editListId, setEditListId] = useState<string>('');
+  const queryClient = useQueryClient();
+
+  const editMutation: UseMutationResult<ITodoListItem, Error, IEditListParams> =
+    useEditList(queryClient);
+
+  const deleteMutation: UseMutationResult<
+    IMessageResponse,
+    Error,
+    IDeleteListParams
+  > = useDeleteList(queryClient);
+
+  const handleSave = (name: string) => {
+    editMutation.mutate({ _id: editListId, name });
+    setEditListId('');
+  };
 
   if (isLoading)
     return (
@@ -42,6 +67,8 @@ const TodoLists: React.FC<ITodoLists> = ({
             isEdit={editListId === list._id}
             onEdit={() => setEditListId(list._id)}
             onCancel={() => setEditListId('')}
+            onDelete={() => deleteMutation.mutate({ _id: list._id })}
+            onSave={handleSave}
           />
         ))}
       {lists.length === 0 && (

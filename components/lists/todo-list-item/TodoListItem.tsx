@@ -1,20 +1,15 @@
+import Link from 'next/link';
 import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
-import { UseMutationResult, useQueryClient } from 'react-query';
-import {
-  IDeleteListParams,
-  IMessageResponse,
-} from '../../../lib/interfaces/list.interface';
-import { useDeleteList } from '../../../lib/mutations/list.mutation';
 import InputBox from '../../forms/input-box/InputBox';
 
 export interface ITodoListItem extends ComponentPropsWithoutRef<'div'> {
   _id: string;
   name: string;
   isEdit: boolean;
-  onEdit?: () => void;
-  _onDelete?: () => void;
-  _onSave?: () => void;
-  onCancel?: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+  onSave: (name: string) => void;
+  onCancel: () => void;
 }
 
 const TodoListItem: React.FC<ITodoListItem> = ({
@@ -22,23 +17,16 @@ const TodoListItem: React.FC<ITodoListItem> = ({
   name,
   isEdit,
   onEdit,
-  _onDelete,
-  _onSave,
+  onDelete,
+  onSave,
   onCancel,
   ...divProps
 }) => {
   const [text, setText] = useState<string>(name);
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     setText(name);
   }, [name, isEdit]);
-
-  const mutation: UseMutationResult<
-    IMessageResponse,
-    Error,
-    IDeleteListParams
-  > = useDeleteList(queryClient);
 
   return (
     <div
@@ -47,7 +35,7 @@ const TodoListItem: React.FC<ITodoListItem> = ({
         isEdit ? 'border-l-green-600' : ''
       }`}
     >
-      <div className="inline-flex flex-1">
+      <Link href={`/lists/${_id}`} className="inline-flex flex-1">
         {!isEdit && (
           <label className="text-gray-700 border-b-transparent hover:cursor-pointer">
             {name}
@@ -60,21 +48,21 @@ const TodoListItem: React.FC<ITodoListItem> = ({
             className="px-0 py-0 border-0 text-base rounded-none bg-transparent focus:ring-blue-500"
           />
         )}
-      </div>
+      </Link>
       <div className="inline-flex space-x-4">
         {!isEdit && (
           <>
             <button title="Edit" onClick={onEdit}>
               <i className="fa-solid fa-pencil text-slate-500 hover:text-green-600"></i>
             </button>
-            <button title="Delete" onClick={() => mutation.mutate({ _id })}>
+            <button title="Delete" onClick={onDelete}>
               <i className="fa-solid fa-trash-can text-slate-500 hover:text-red-500"></i>
             </button>
           </>
         )}
         {isEdit && (
           <>
-            <button title="Save">
+            <button title="Save" onClick={() => onSave(text)}>
               <i className="fa-solid fa-check text-slate-500 hover:text-green-600"></i>
             </button>
             <button title="Cancel" onClick={onCancel}>

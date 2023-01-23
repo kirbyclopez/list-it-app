@@ -12,6 +12,18 @@ export const createList = async (name: string): Promise<ITodoListItem> => {
   return res.data;
 };
 
+export const editList = async (
+  _id: string,
+  name: string
+): Promise<ITodoListItem> => {
+  const data = { name };
+  const res: AxiosResponse = await instance.put(`/api/lists/${_id}`, data, {
+    withCredentials: true,
+  });
+
+  return res.data;
+};
+
 export const deleteList = async (_id: string): Promise<IMessageResponse> => {
   const res: AxiosResponse = await instance.delete(`/api/lists/${_id}`, {
     withCredentials: true,
