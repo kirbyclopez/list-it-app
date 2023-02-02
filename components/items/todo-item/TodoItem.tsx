@@ -34,7 +34,7 @@ const TodoItem: React.FC<ITodoItem> = ({
   return (
     <div
       {...divProps}
-      className={`flex items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent space-x-6 hover:bg-slate-50 ${
+      className={`flex items-center text-sm sm:text-base border-b border-slate-200 py-2 sm:py-3 px-2 border-l-4  border-l-transparent space-x-6 hover:bg-slate-50 ${
         isEdit ? 'border-l-green-600' : ''
       }`}
     >
@@ -63,7 +63,7 @@ const TodoItem: React.FC<ITodoItem> = ({
           <InputBox
             value={text}
             onChange={(e) => setText(e.currentTarget.value)}
-            className="px-0 py-0 border-0 text-base rounded-none bg-transparent focus:ring-blue-500"
+            className="px-0 py-0 border-0 sm:text-base rounded-none bg-transparent focus:ring-blue-500"
           />
         </div>
       )}

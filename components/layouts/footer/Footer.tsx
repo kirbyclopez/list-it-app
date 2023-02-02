@@ -8,7 +8,7 @@ const Footer: React.FC<IFooter> = ({ ...footerProps }) => {
   return (
     <footer
       {...footerProps}
-      className="footer footer-center w-full p-4 bg-gray-100 text-gray-400"
+      className="footer footer-center w-full p-2 md:p-4 bg-gray-100 text-gray-400"
     >
       <div className="text-center">
         <p>

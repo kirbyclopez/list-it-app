@@ -29,8 +29,10 @@ const Home: NextPageWithLayout = () => {
         <title>List It | Task Lists</title>
       </Head>
       <div className="flex flex-col flex-1 items-center">
-        <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
-          <h1 className="text-center text-3xl font-medium">My Lists</h1>
+        <div className="max-w-xl w-full mx-auto my-4 sm:my-10 bg-white p-4 sm:p-8 rounded-none sm:rounded-xl space-y-3 sm:space-y-6 shadow shadow-slate-300">
+          <h1 className="text-center text-xl sm:text-2xl font-medium">
+            My Lists
+          </h1>
           <AddListForm />
           <TodoLists
             lists={data || []}

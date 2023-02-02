@@ -24,8 +24,10 @@ const LoginForm: React.FC<ILoginForm> = () => {
   };
 
   return (
-    <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-sm mt-2 md:mt-40 flex flex-col items-center space-y-6">
-      <Image src={logo} alt="List It Logo" height={150} width={150} />
+    <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-sm mt-6 sm:mt-20 md:mt-40 flex flex-col items-center space-y-6">
+      <div className="relative w-[120px] sm:w-[150px] h-[120px] sm:h-[150px]">
+        <Image src={logo} alt="List It Logo" fill={true} />
+      </div>
       <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
         <div className="px-5 py-7">
           <form onSubmit={handleSubmit}>

@@ -57,15 +57,15 @@ const List: NextPageWithLayout<IList> = () => {
         <title>List It | Items</title>
       </Head>
       <div className="flex flex-col flex-1 items-center">
-        <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
+        <div className="max-w-xl w-full mx-auto my-4 sm:my-10 bg-white p-4 sm:p-8 rounded-none sm:rounded-xl space-y-3 sm:space-y-6 shadow shadow-slate-300">
           <div className="flex flex-row relative">
             <Link
               href="/"
-              className="absolute left-0 top-1 text-slate-500 hover:text-green-600"
+              className="absolute left-0 top-0 sm:top-1 text-slate-500 hover:text-green-600"
             >
-              <i className="fa-solid fa-chevron-left text-xl"></i>
+              <i className="fa-solid fa-chevron-left text-lg sm:text-xl"></i>
             </Link>
-            <h1 className="flex-1 text-center text-3xl font-medium">
+            <h1 className="flex-1 text-center text-xl sm:text-2xl font-medium">
               {list?.name}
             </h1>
           </div>
