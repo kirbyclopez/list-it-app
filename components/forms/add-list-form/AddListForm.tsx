@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { UseMutationResult, useQueryClient } from 'react-query';
-import { ICreateListParams } from '../../../lib/interfaces/list.interface';
+import {
+  ICreateListParams,
+  IList,
+} from '../../../lib/interfaces/list.interface';
 import { useCreateList } from '../../../lib/mutations/list.mutation';
-import { ITodoListItem } from '../../lists/todo-list-item/TodoListItem';
 import InputBox from '../input-box/InputBox';
 
 export interface IAddListForm {}
@@ -11,7 +13,7 @@ const AddListForm: React.FC<IAddListForm> = () => {
   const [name, setName] = useState<string>('');
   const queryClient = useQueryClient();
 
-  const mutation: UseMutationResult<ITodoListItem, Error, ICreateListParams> =
+  const mutation: UseMutationResult<IList, Error, ICreateListParams> =
     useCreateList(queryClient);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -3,16 +3,17 @@ import { UseMutationResult, useQueryClient } from 'react-query';
 import {
   IDeleteListParams,
   IEditListParams,
+  IList,
   IMessageResponse,
 } from '../../../lib/interfaces/list.interface';
 import {
   useDeleteList,
   useEditList,
 } from '../../../lib/mutations/list.mutation';
-import TodoListItem, { ITodoListItem } from '../todo-list-item/TodoListItem';
+import TodoListItem from '../todo-list-item/TodoListItem';
 
 export interface ITodoLists extends ComponentPropsWithoutRef<'div'> {
-  lists: ITodoListItem[];
+  lists: IList[];
   isLoading: boolean;
   isError: boolean;
   error: string;
@@ -28,7 +29,7 @@ const TodoLists: React.FC<ITodoLists> = ({
   const [editListId, setEditListId] = useState<string>('');
   const queryClient = useQueryClient();
 
-  const editMutation: UseMutationResult<ITodoListItem, Error, IEditListParams> =
+  const editMutation: UseMutationResult<IList, Error, IEditListParams> =
     useEditList(queryClient);
 
   const deleteMutation: UseMutationResult<
