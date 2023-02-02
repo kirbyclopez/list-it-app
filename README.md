@@ -1,38 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# List It
 
-## Getting Started
+List It is your companion in creating your task lists which you can access anywhere as long as you have internet connection.
 
-First, run the development server:
+<br>
+
+## Live Preview
+
+You can try this application at [https://list-it.klcodes.com](https://list-it.klcodes.com)
+
+<br>
+
+## Available Scripts
+
+In the project directory, you can run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) with your browser to access the application.
+This app comes in pair with an API backend which should also be run in dev mode.
+The API backend can be found in this [https://github.com/kirbyclopez/todo-api-v2](link).
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<br>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Learn More
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-To learn more about Next.js, take a look at the following resources:
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Runs the app using the production build.\
+Open [http://localhost:3000](http://localhost:3000) with your browser to access the application.
 
-## Deploy on Vercel
+<br>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. User Authentication
+   1. Login
+   2. Logout
+2. Manage Lists
+   1. View Lists
+   2. Add New List
+   3. Update List
+   4. Remove List
+3. Manage List Items
+   1. View List Items
+   2. Add New List Item
+   3. Update List Item Name
+   4. Mark List Item Complete/Not Complete
+   5. Remove List Item
