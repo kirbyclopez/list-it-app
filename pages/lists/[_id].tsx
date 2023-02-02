@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   DehydratedState,
@@ -9,6 +10,7 @@ import {
   useQuery,
 } from 'react-query';
 import AddItemForm from '../../components/forms/add-item-form/AddItemForm';
+import TodoItems from '../../components/items/todo-items/TodoItems';
 import Footer from '../../components/layouts/footer/Footer';
 import Header from '../../components/layouts/header/Header';
 import PrimaryLayout from '../../components/layouts/primary/PrimaryLayout';
@@ -33,10 +35,10 @@ const List: NextPageWithLayout<IList> = () => {
   );
 
   const {
-    isLoading: _isItemsLoading,
-    isError: _isItemsError,
-    error: _itemsError,
-    data: _items,
+    isLoading: isItemsLoading,
+    isError: isItemsError,
+    error: itemsError,
+    data: items,
   }: UseQueryResult<IItem[], Error> = useQuery<IItem[], Error>(
     ['items', _id],
     ({ queryKey }) => fetchItems(queryKey[1] as string)
@@ -56,8 +58,24 @@ const List: NextPageWithLayout<IList> = () => {
       </Head>
       <div className="flex flex-col flex-1 items-center">
         <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
-          <h1 className="text-center text-3xl font-medium">{list?.name}</h1>
+          <div className="flex flex-row relative">
+            <Link
+              href="/"
+              className="absolute left-0 top-1 text-slate-500 hover:text-green-600"
+            >
+              <i className="fa-solid fa-chevron-left text-xl"></i>
+            </Link>
+            <h1 className="flex-1 text-center text-3xl font-medium">
+              {list?.name}
+            </h1>
+          </div>
           <AddItemForm listId={list?._id as string} />
+          <TodoItems
+            items={items || []}
+            isLoading={isItemsLoading}
+            isError={isItemsError}
+            error={itemsError?.message || ''}
+          />
         </div>
       </div>
     </>

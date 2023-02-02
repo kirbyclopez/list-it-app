@@ -1,9 +1,12 @@
 import { ITodoItem } from './TodoItem';
 
 const base: ITodoItem = {
-  _id: '1',
-  name: 'Sample List',
-  isComplete: true,
+  item: {
+    _id: '1',
+    name: 'Sample List',
+    isComplete: true,
+    listId: '1',
+  },
   isEdit: false,
   onEdit: () => {},
   onDelete: () => {},

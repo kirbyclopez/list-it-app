@@ -1,21 +1,23 @@
 import { ComponentPropsWithoutRef, useEffect, useState } from 'react';
+import { IItem } from '../../../lib/interfaces/item.interface';
 import InputBox from '../../forms/input-box/InputBox';
 
 export interface ITodoItem extends ComponentPropsWithoutRef<'div'> {
-  _id: string;
-  name: string;
-  isComplete: boolean;
+  item: IItem;
   isEdit: boolean;
   onEdit: () => void;
   onDelete: () => void;
-  onSave: (_name: string) => void;
+  onSave: (
+    _listId: string,
+    _id: string,
+    _name: string,
+    _isComplete: boolean
+  ) => void;
   onCancel: () => void;
 }
 
 const TodoItem: React.FC<ITodoItem> = ({
-  _id,
-  name,
-  isComplete,
+  item,
   isEdit,
   onEdit,
   onDelete,
@@ -23,11 +25,11 @@ const TodoItem: React.FC<ITodoItem> = ({
   onCancel,
   ...divProps
 }) => {
-  const [text, setText] = useState<string>(name);
+  const [text, setText] = useState<string>(item.name);
 
   useEffect(() => {
-    setText(name);
-  }, [name, isEdit]);
+    setText(item.name);
+  }, [item.name, isEdit]);
 
   return (
     <div
@@ -40,17 +42,20 @@ const TodoItem: React.FC<ITodoItem> = ({
         <div className="inline-flex items-center flex-1 space-x-3">
           <i
             className={`fa-regular cursor-pointer ${
-              isComplete
+              item.isComplete
                 ? 'fa-circle-check text-green-500'
                 : 'fa-circle text-slate-500'
             }`}
+            onClick={() =>
+              onSave(item.listId, item._id, item.name, !item.isComplete)
+            }
           ></i>
           <label
             className={`flex-1 border-b-transparent ${
-              isComplete ? 'text-slate-500 line-through' : 'text-slate-700'
+              item.isComplete ? 'text-slate-500 line-through' : 'text-slate-700'
             }`}
           >
-            {name}
+            {item.name}
           </label>
         </div>
       ) : (
@@ -75,7 +80,12 @@ const TodoItem: React.FC<ITodoItem> = ({
         )}
         {isEdit && (
           <>
-            <button title="Save" onClick={() => onSave(text)}>
+            <button
+              title="Save"
+              onClick={() =>
+                onSave(item.listId, item._id, text, item.isComplete)
+              }
+            >
               <i className="fa-solid fa-check text-slate-500 hover:text-green-600"></i>
             </button>
             <button title="Cancel" onClick={onCancel}>

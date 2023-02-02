@@ -2,6 +2,7 @@ export interface IItem {
   _id: string;
   name: string;
   isComplete: boolean;
+  listId: string;
 }
 
 export interface ICreateItemParams {
