@@ -8,6 +8,7 @@ import {
   dehydrate,
   useQuery,
 } from 'react-query';
+import AddItemForm from '../../components/forms/add-item-form/AddItemForm';
 import Footer from '../../components/layouts/footer/Footer';
 import Header from '../../components/layouts/header/Header';
 import PrimaryLayout from '../../components/layouts/primary/PrimaryLayout';
@@ -56,6 +57,7 @@ const List: NextPageWithLayout<IList> = () => {
       <div className="flex flex-col flex-1 items-center">
         <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
           <h1 className="text-center text-3xl font-medium">{list?.name}</h1>
+          <AddItemForm listId={list?._id as string} />
         </div>
       </div>
     </>
@@ -93,7 +95,7 @@ export const getServerSideProps: GetServerSideProps = async (
     return res.data;
   });
 
-  await queryClient.prefetchQuery('items', async () => {
+  await queryClient.prefetchQuery(['items', id], async () => {
     const res = await instance.get(`/api/lists/${id}/items`, {
       withCredentials: true,
       headers: {

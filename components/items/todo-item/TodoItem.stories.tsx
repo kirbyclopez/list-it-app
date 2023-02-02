@@ -3,7 +3,7 @@ import TodoItem, { ITodoItem } from './TodoItem';
 import { mockTodoItemProps } from './TodoItem.mocks';
 
 export default {
-  title: 'lists/TodoItem',
+  title: 'items/TodoItem',
   component: TodoItem,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
