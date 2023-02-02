@@ -32,10 +32,10 @@ const List: NextPageWithLayout<IList> = () => {
   );
 
   const {
-    isLoading: isItemsLoading,
-    isError: isItemsError,
-    error: itemsError,
-    data: items,
+    isLoading: _isItemsLoading,
+    isError: _isItemsError,
+    error: _itemsError,
+    data: _items,
   }: UseQueryResult<IItem[], Error> = useQuery<IItem[], Error>(
     ['items', _id],
     ({ queryKey }) => fetchItems(queryKey[1] as string)
