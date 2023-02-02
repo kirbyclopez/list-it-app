@@ -1,5 +1,10 @@
 import { ITodoListItem } from '../../components/lists/todo-list-item/TodoListItem';
 
+export interface IList {
+  _id: string;
+  name: string;
+}
+
 export interface ICreateListParams {
   name: string;
 }

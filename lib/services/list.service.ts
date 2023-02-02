@@ -1,9 +1,24 @@
 import { AxiosResponse } from 'axios';
-import { ITodoListItem } from '../../components/lists/todo-list-item/TodoListItem';
 import { instance } from '../axios';
-import { IMessageResponse } from '../interfaces/list.interface';
+import { IList, IMessageResponse } from '../interfaces/list.interface';
 
-export const createList = async (name: string): Promise<ITodoListItem> => {
+export const fetchLists = async () => {
+  const res = await instance.get('/api/lists', {
+    withCredentials: true,
+  });
+
+  return res.data;
+};
+
+export const fetchList = async (_id: string): Promise<IList> => {
+  const res = await instance.get(`/api/lists/${_id}`, {
+    withCredentials: true,
+  });
+
+  return res.data;
+};
+
+export const createList = async (name: string): Promise<IList> => {
   const data = { name };
   const res: AxiosResponse = await instance.post('/api/lists', data, {
     withCredentials: true,
@@ -12,10 +27,7 @@ export const createList = async (name: string): Promise<ITodoListItem> => {
   return res.data;
 };
 
-export const editList = async (
-  _id: string,
-  name: string
-): Promise<ITodoListItem> => {
+export const editList = async (_id: string, name: string): Promise<IList> => {
   const data = { name };
   const res: AxiosResponse = await instance.put(`/api/lists/${_id}`, data, {
     withCredentials: true,

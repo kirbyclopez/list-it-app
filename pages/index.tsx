@@ -9,15 +9,8 @@ import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
 import { ITodoListItem } from '../components/lists/todo-list-item/TodoListItem';
 import TodoLists from '../components/lists/todo-lists/TodoLists';
 import { instance } from '../lib/axios';
+import { fetchLists } from '../lib/services/list.service';
 import { NextPageWithLayout } from './page';
-
-export const fetchLists = async () => {
-  const res = await instance.get('/api/lists', {
-    withCredentials: true,
-  });
-
-  return res.data;
-};
 
 const Home: NextPageWithLayout = () => {
   const {
@@ -37,7 +30,7 @@ const Home: NextPageWithLayout = () => {
       </Head>
       <div className="flex flex-col flex-1 items-center">
         <div className="max-w-xl w-full mx-auto my-10 bg-white p-8 rounded-xl space-y-6 shadow shadow-slate-300">
-          <h1 className="text-center text-3xl font-medium">Task Lists</h1>
+          <h1 className="text-center text-3xl font-medium">My Lists</h1>
           <AddListForm />
           <TodoLists
             lists={data || []}
